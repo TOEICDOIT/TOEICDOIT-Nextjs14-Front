@@ -75,7 +75,7 @@ const ToeicPlayer = () => {
     };
 
     return (<>
-        <div className='bg-white shadow-lg rounded-xl w-full p-2 border-slate-200 border-2 flex flex-row items-center justify-between gap-x-3 animate-slidein400'>
+        <div className='bg-white shadow-lg rounded-xl w-full p-2 border-slate-200 border-2 flex flex-row items-center justify-between gap-x-3'>
             <audio
                 ref={audioRef}
                 src="/audio/example.mp3"

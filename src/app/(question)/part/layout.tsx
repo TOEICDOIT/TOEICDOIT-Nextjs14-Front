@@ -1,4 +1,4 @@
-import LayoutWrapper from "./LayoutWrapper";
+import LayoutWrapper from "@/app/(question)/part/LayoutWrapper";
 
 export const metadata = {
     title: "Toeicdoit - Level Practice Page",

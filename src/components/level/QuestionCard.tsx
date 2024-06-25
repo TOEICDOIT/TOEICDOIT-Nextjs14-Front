@@ -10,7 +10,7 @@ const QuestionCard = ({
     option: OptionData;
 }) => {
     return (<>
-        <div className="flex flex-col justify-center m-7 2xl:my-7 2xl:w-[650px] animate-slidein300">
+        <div className="flex flex-col justify-center m-7 2xl:my-7 2xl:w-[650px]">
             <div className="flex flex-row gap-x-2 mb-5 mx-40 2xl:mx-0">
                 <h1
                     key="level practice number"

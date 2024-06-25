@@ -15,13 +15,13 @@
     font-family: "Jua", sans-serif;
     font-style: normal;
     letter-spacing:0.05em;
-}
+  }
 
-.font-poetsen-navbar {
+  .font-poetsen-navbar {
     font-family:  "Poetsen One", sans-serif;
     font-size:40px;
     letter-spacing:0.05em;
-}
+  }
 
   .font-poetsen-footer {
     font-family:  "Poetsen One", sans-serif;
@@ -29,6 +29,45 @@
     letter-spacing:0.05em;
   }
   
+ 
+}
+
+.loader {
+  position: relative;
+  margin: 0 auto;
+  width: 100px;
+  &:before {
+    content: '';
+    display: block;
+    padding-top: 100%;
+  }
+}
+
+.circular {
+  animation: rotate 2s linear infinite;
+  height: 50%;
+  transform-origin: center center;
+  width: 50%;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+
+.path {
+  stroke-dasharray: 1, 200;
+  stroke-dashoffset: 0;
+  animation: dash 1.5s ease-in-out infinite, color 6s ease-in-out infinite;
+  stroke-linecap: round;
+}
+.showbox {
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 5%;
 }
 
 .gradient-01 {

@@ -30,7 +30,7 @@ export default async function PostPage({searchParams}:{
     }
 
     try{
-        const resposnse=await fetch(`${process.env.NEXT_PUBLIC_API_URL}/post/getAll`,{
+        const response=await fetch(`${process.env.NEXT_PUBLIC_API_URL}/post/getAll`,{
             method:'POST',
             headers:{
                 'Content-Type':'application/json'
@@ -39,11 +39,11 @@ export default async function PostPage({searchParams}:{
             cache:'no-store'
         })
 
-        if(!resposnse.ok){
+        if(!response.ok){
             throw new Error('Failed to fetch post');
         }
 
-        const data:I_ApiArticleResponse=await resposnse.json();
+        const data:I_ApiArticleResponse=await response.json();
 
         if(data && data.success){
             posts=data.articles;

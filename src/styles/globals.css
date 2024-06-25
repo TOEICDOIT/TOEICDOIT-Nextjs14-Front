@@ -6,6 +6,7 @@
 @import "my-page.css";
 @import "toeic.css";
 @import "form.css";
+@import "animations.css";
 
 :root {
   --foreground-rgb: 0, 0, 0;
@@ -20,7 +21,10 @@
   --yellow2:#F9F07A;
   --red:#dc2626;
   --gray:#e2e8f0;
-
+  --duration: 1.5s;
+	--container-size: 250px;
+	--box-size: 33px;
+	--box-border-radius: 15%;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -49,6 +53,76 @@ body {
   .text-balance {
     text-wrap: balance;
   }  
+  .box::before{
+    @apply content-[''] absolute bg-[conic-gradient(#3b82f6_20deg,transparent_120deg)] w-[900px] h-[900px]
+    top-[-25%] left-[-25%] fullSpin
+  }
+  .box::after{
+    @apply  w-[94%] h-[94%] 
+    absolute top-[3%] left-[3%] flex justify-center items-center tracking-[2px] font-medium text-4xl font-serif
+    
+  }
+
+  .fullSpin {
+    transform: rotate(-360deg);
+    animation: fullSpin 3s linear infinite;
+  }
+ 
+
+  .box_loading {
+    @apply w-[var(--box-size)] h-[var(--box-size)] relative block;
+    transform-origin: -50% center;
+    border-radius: var(--box-border-radius);
+  }
+
+  .box_loading::after {
+    @apply content-[''] w-full h-full absolute top-0 right-0 bg-blue-500 rounded-[var(--box-border-radius)] shadow-[0_0_10px_0_rgba(28,159,255,0.4)];
+  }
+
+  .box_loading:nth-child(1) {
+    animation: slide var(--duration) ease-in-out infinite alternate;
+  }
+
+  .box_loading:nth-child(1)::after {
+    animation: color-change var(--duration) ease-in-out infinite alternate;
+  }
+
+  .box_loading:nth-child(2) {
+    animation: flip-2 var(--duration) ease-in-out infinite alternate;
+  }
+
+  .box_loading:nth-child(2)::after {
+    background-color: #1C9FFF;
+    animation: squidge-2 var(--duration) ease-in-out infinite alternate;
+  }
+
+  .box_loading:nth-child(3) {
+    animation: flip-3 var(--duration) ease-in-out infinite alternate;
+  }
+
+  .box_loading:nth-child(3)::after {
+    background-color: #1FB1FD;
+    animation: squidge-3 var(--duration) ease-in-out infinite alternate;
+  }
+
+  .box_loading:nth-child(4) {
+    animation: flip-4 var(--duration) ease-in-out infinite alternate;
+  }
+
+  .box_loading:nth-child(4)::after {
+    background-color: #22C7FB;
+    animation: squidge-4 var(--duration) ease-in-out infinite alternate;
+  }
+
+  .box_loading:nth-child(5) {
+    animation: flip-5 var(--duration) ease-in-out infinite alternate;
+  }
+
+  .box_loading:nth-child(5)::after {
+    background-color: #23D3FB;
+    animation: squidge-5 var(--duration) ease-in-out infinite alternate;
+  }
+
 }
 
 

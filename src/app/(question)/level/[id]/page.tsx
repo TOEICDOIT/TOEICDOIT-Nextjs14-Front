@@ -1,18 +1,27 @@
+import LoadingPage from "@/app/loading";
 import ToeicPlayer from "@/components/audio/ToeicPlayer";
 import LevelHeader from "@/components/level/LevelHeader";
 import QuestionCard from "@/components/level/QuestionCard";
-import {useInfiniteQuery} from "@tanstack/react-query";
+import { fetchQuestions } from "@/service/level/action";
+import QuestionContainer from "@/templates/level/QuestionContainer";
+import { Suspense } from "react";
 
-export const metadata = {
-    title: "Toeicdoit - Level Practice Page",
-    description: "",
-};
+// const LoadingPage = dynamic(() => import('@/app/loading'), { ssr: false });
+// const PaginationLoading = dynamic(() => import('@/components/utils/PaginationLoading'), { ssr: false });
 
-export default function LevelPracticePage({
-    params
-}: {
-    params: { id: number }
+export default async function LevelPracticePage({ params }: {
+    params: {
+        id: number;
+        page?: string;
+    }
 }) {
+
+    const level = params.id
+    const page = typeof params.page === 'string' ? Number(params.page) : 1;
+    const limit: number = 10;
+
+    const promise = await fetchQuestions({ level });
+
     // try{
     //     const audio=fetch('/api/level/audio');
     // }catch(err){
@@ -21,23 +30,6 @@ export default function LevelPracticePage({
 
 
     return (<>
-        <div className="flex flex-col w-full items-center justify-center">
-            <LevelHeader id={params.id} />
-            <ToeicPlayer />
-            <div className="mt-10" />
-            <div className="flex flex-wrap justify-between">
-                <div className="flex justify-center">
-
-                    <QuestionCard id={1} question={" question is so hard. question is so hard. question is so hard. question is so hard. question is so hard. question is so hard. question is so hard. "} picture={"/images/dashboard/planet-01.png"} option={{
-                        id: 0,
-                        choice1: "",
-                        choice2: "",
-                        choice3: "",
-                        choice4: ""
-                    }} />
-                </div>
-
-            </div>
-        </div>
+        <QuestionContainer id={params.id}/>
     </>);
 }
