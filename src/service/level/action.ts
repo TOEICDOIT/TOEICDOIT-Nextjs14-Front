@@ -1,47 +1,60 @@
 'use server';
 
-import { I_ApiLevelPracticeRequest, I_ApiLevelPracticeResponse, ToeicDataPublic } from "@/types/ToeicData";
+import { CommonHeader } from "@/config/headers";
+import { ITEMS_PER_PAGE, I_ApiLevelPracticeRequest, I_ApiLevelPracticeResponse, ToeicDataPublic } from "@/types/ToeicData";
 
-export async function fetchQuestions(
-    {page=1,level,limit=10}
-    :
-    {page?:number,level:number,limit?:number}
-){
+export async function fetchQuestions({ 
+    pageParam = 1, level
+}:{
+    pageParam:number,level:number
+}) {
 
-    let questions:ToeicDataPublic[]=[];
+    console.log('page: ', pageParam);
+    console.log('level: ', level);
 
-    const payload:I_ApiLevelPracticeRequest={
-        currentPage:page,
-        level:level
-    }
+    let questions: ToeicDataPublic[] = [];
+    const offset = (pageParam - 1) * ITEMS_PER_PAGE;
 
-    try{
-        const response=await fetch(`${process.env.NEXT_PUBLIC_API_URL}`,{
-            method:'POST',
-            headers:{
-                'Content-Type':'application/json'
-            },
-            body:JSON.stringify(payload),
-            cache:'no-store'
+    const payload: I_ApiLevelPracticeRequest = {
+        currentPage: pageParam,
+        level: level,
+        offset: offset
+    };
+
+    try {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/toeic/level?page=${pageParam}`, {
+            method: 'POST',
+            headers: CommonHeader,
+            body: JSON.stringify(payload),
+            next: { revalidate: 60 }
         });
 
-        if(!response.ok){
+        if (!response.ok) {
             throw new Error('Failed to fetch question');
         }
 
-        const data:I_ApiLevelPracticeResponse=await response.json();
+        const data: I_ApiLevelPracticeResponse = await response.json();
 
-        
-        if(data && data.success){
-            questions=data.questions;
-        }else{
-            console.error('Failed to get response data',data.message);
+        if (data && data.success) {
+            questions = data.questions;
+        } else {
+            console.error('Failed to get response data', data.message);
         }
 
-        return {questions:questions};
-    
-    }catch(err){
-        console.log('Failed to get level: ',err);
-        return {err};
+        const nextPage = data.questions.length === ITEMS_PER_PAGE ? pageParam + 1 : null;
+
+        return {
+            data: questions,
+            currentPage: pageParam,
+            nextPage: nextPage,
+        };
+        
+    } catch (err) {
+        console.log('Failed to get level: ', err);
+        return {
+            data: questions,
+            currentPage: pageParam,
+            nextPage: null,
+        };
     }
 }

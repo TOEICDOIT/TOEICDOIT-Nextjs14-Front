@@ -6,6 +6,7 @@ import { I_ApiArticleRequest, I_ApiArticleResponse, ArticleDataPublic } from "@/
 import { ITEMS_PER_PAGE } from "@/types/ToeicData";
 import { Suspense } from "react";
 import WriteBtn from "@/components/button/WriteBtn";
+import { CommonHeader } from "@/config/headers";
 
 export const metadata = {
     title: "Toeicdoit - Post Page",
@@ -32,9 +33,7 @@ export default async function PostPage({searchParams}:{
     try{
         const response=await fetch(`${process.env.NEXT_PUBLIC_API_URL}/post/getAll`,{
             method:'POST',
-            headers:{
-                'Content-Type':'application/json'
-            },
+            headers:CommonHeader,
             body:JSON.stringify(payload),
             cache:'no-store'
         })

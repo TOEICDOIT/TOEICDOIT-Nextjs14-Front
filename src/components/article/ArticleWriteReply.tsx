@@ -3,7 +3,7 @@
 import { createReply } from "@/service/post/action";
 import { ChangeEvent, useState } from "react";
 import { useFormState } from "react-dom";
-import SubmitButton from "../common/SubmitBtn";
+import SubmitButton from "../button/SubmitBtn";
 import { usePathname } from "next/navigation";
 
 const initialState = {

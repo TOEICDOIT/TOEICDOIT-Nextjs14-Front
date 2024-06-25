@@ -5,6 +5,7 @@ import CustomPagination from "@/components/common/CustomPagination";
 import {I_ApiArticleRequest, I_ApiArticleResponse, ArticleDataPublic } from "@/types/ArticleData";
 import { ITEMS_PER_PAGE } from "@/types/ToeicData";
 import { Suspense } from "react";
+import { CommonHeader } from "@/config/headers";
 
 export const metadata = {
     title: "Toeicdoit - Notice Page",
@@ -32,9 +33,7 @@ export default async function NoticePage({searchParams}:{
     try{
         const response=await fetch(`${process.env.NEXT_PUBLIC_API_URL}/article/getAll`,{
             method:'POST',
-            headers:{
-                'Content-Type':'application/json'
-            },
+            headers:CommonHeader,
             body:JSON.stringify(payload),
             next:{revalidate:60*60}
         })

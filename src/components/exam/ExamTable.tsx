@@ -4,6 +4,7 @@ import TakeBtn from "../button/TakeBtn";
 import CompleteBtn from "../button/CompleteBtn";
 import ExamBody from "./ExamBody";
 import { I_ApiExamSearchRequest, I_ApiExamSearchResponse } from "@/app/api/exam/search/route";
+import { CommonHeader } from "@/config/headers";
 
 export default async function ExamTable({ query, currentPage }: {
     query: string,
@@ -25,9 +26,7 @@ export default async function ExamTable({ query, currentPage }: {
     try{
         const response=await fetch(`${process.env.NEXT_PUBLIC_BASIC_URL}/api/exam/search`,{
             method:'POST',
-            headers:{
-                'Content-Type': 'application/json',
-            },
+            headers:CommonHeader,
             body:JSON.stringify(payload),
         })
     

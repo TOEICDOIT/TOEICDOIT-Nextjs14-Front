@@ -3,6 +3,7 @@ import ArticleDetailControl from "@/components/article/ArticleDetailControl";
 import ArticleDetailProfile from "@/components/article/ArticleDetailProfile";
 import ArticleDetailTitle from "@/components/article/ArticleDetailTitle";
 import NoticeLink from "@/components/article/NoticeLink";
+import { CommonHeader } from "@/config/headers";
 import { I_ApiArticleDetailRequest, ArticleDetail, I_ApiArticleDetailResponse } from "@/types/ArticleData";
 
 export const metadata = {
@@ -31,9 +32,7 @@ export default async function ArticleDetailPage({ params }: {
     try {
         const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/post/getDetail`, {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
+            headers:CommonHeader,
             body: JSON.stringify(payload),
             next: { revalidate: 60 * 60 }
         })

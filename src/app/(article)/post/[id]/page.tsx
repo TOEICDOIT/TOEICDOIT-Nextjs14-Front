@@ -6,6 +6,7 @@ import ArticleDetailTitle from "@/components/article/ArticleDetailTitle";
 import ArticleWriteReply from "@/components/article/ArticleWriteReply";
 import NoticeLink from "@/components/article/NoticeLink";
 import PostLink from "@/components/article/PostLink";
+import { CommonHeader } from "@/config/headers";
 import { I_ApiArticleDetailRequest, ArticleDetail, I_ApiArticleDetailResponse } from "@/types/ArticleData";
 import ChatIcon from '@mui/icons-material/Chat';
 
@@ -35,9 +36,7 @@ export default async function PostDetailPage({ params }: {
     try {
         const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/post/getDetail`, {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
+            headers:CommonHeader,
             body: JSON.stringify(payload),
             next: { revalidate: 60 * 60 }
         })

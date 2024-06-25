@@ -50,6 +50,7 @@ export const CURRENT_TOTAL_PAGE=10;
 export interface I_ApiLevelPracticeRequest{
     currentPage?:number;
     level:number;
+    offset?:number;
 }
 export interface I_ApiLevelPracticeResponse{
     questions:ToeicDataPublic[];

@@ -1,5 +1,5 @@
 "use client";
-import SubmitButton from "@/components/common/SubmitBtn";
+import SubmitButton from "@/components/button/SubmitBtn";
 import { createPost } from "@/service/post/action";
 import { ChangeEvent, useState } from "react";
 import { useFormState } from "react-dom";

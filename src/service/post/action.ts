@@ -1,6 +1,7 @@
 "use server";
 import { I_ApiPostReplyRequest } from "@/app/api/post/reply/route";
 import { I_ApiPostWriteRequest } from "@/app/api/post/write/route";
+import { CommonHeader } from "@/config/headers";
 import { PostReplySchema, PostWriteSchema } from "@/types/schemas";
 import { revalidatePath, revalidateTag } from "next/cache";
 import { redirect } from "next/navigation";
@@ -27,9 +28,7 @@ export async function createPost(prevState: { message: string },
 
     const response = await fetch(`${process.env.NEXT_PUBLIC_BASIC_URL}/api/post/write`, {
         method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
+        headers: CommonHeader,
         body: JSON.stringify(rawFormData),
         cache: 'no-store'
     });
@@ -62,9 +61,7 @@ export async function createReply(prevState: { message: string },
 
     const response = await fetch(`${process.env.NEXT_PUBLIC_BASIC_URL}/api/post/reply`, {
         method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
+        headers: CommonHeader,
         body: JSON.stringify(rawFormData),
         cache: 'no-store'
     });

@@ -5,7 +5,7 @@ import PauseCircleOutlineIcon from '@mui/icons-material/PauseCircleOutline';
 import VolumeUpIcon from '@mui/icons-material/VolumeUp';
 import VolumeOffIcon from '@mui/icons-material/VolumeOff';
 
-const ToeicPlayer = () => {
+const ToeicPlayer = ({sound}:{sound:string}) => {
     const [isPlaying, setIsPlaying] = useState(false);
     const [currentTime, setCurrentTime] = useState(0);
     const [duration, setDuration] = useState(0);
@@ -78,7 +78,7 @@ const ToeicPlayer = () => {
         <div className='bg-white shadow-lg rounded-xl w-full p-2 border-slate-200 border-2 flex flex-row items-center justify-between gap-x-3'>
             <audio
                 ref={audioRef}
-                src="/audio/example.mp3"
+                src={`${sound}`}
                 preload='none'
                 onLoadedMetadata={onLoadedMetadata}
                 onTimeUpdate={onTimeUpdate}

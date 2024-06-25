@@ -6,6 +6,7 @@ import ExamLoading from "@/components/exam/ExamLoading";
 import ExamTable from "@/components/exam/ExamTable";
 import CustomPagination from "@/components/common/CustomPagination";
 import { Suspense } from "react";
+import { CommonHeader } from "@/config/headers";
 
 export default async function ExamPage({ searchParams }: {
     searchParams?: {
@@ -24,9 +25,7 @@ export default async function ExamPage({ searchParams }: {
     try{
         const response=await fetch(`${process.env.NEXT_PUBLIC_BASIC_URL}/api/exam`,{
             method:'POST',
-            headers:{
-                'Content-Type': 'application/json',
-            },
+            headers:CommonHeader,
             body:JSON.stringify(payload),
         });
     

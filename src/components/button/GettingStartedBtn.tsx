@@ -1,4 +1,4 @@
-import { PG } from "@/constants/enums/API"
+import { PG } from "@/constants/enums/PG"
 import Link from "next/link"
 
 export const GettingStartedBtn = ({isSticky}:{isSticky:boolean}) => {

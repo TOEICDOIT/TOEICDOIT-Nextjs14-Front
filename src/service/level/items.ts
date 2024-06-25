@@ -1,4 +1,4 @@
-const items = Array.from({ length: 100 }).map((_, i) => ({
+const items = Array.from({ length: 20 }).map((_, i) => ({
     id: i,
     name: `Item ${i}`,
 }));
