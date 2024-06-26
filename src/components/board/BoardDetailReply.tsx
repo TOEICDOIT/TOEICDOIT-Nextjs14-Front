@@ -1,5 +1,5 @@
 
-const ArticleDetailReply = ({
+const BoardDetailReply = ({
     id,writer, content,create
 }: {
     id:number,
@@ -34,4 +34,4 @@ const ArticleDetailReply = ({
         
     </>);
 }
-export default ArticleDetailReply;
+export default BoardDetailReply;

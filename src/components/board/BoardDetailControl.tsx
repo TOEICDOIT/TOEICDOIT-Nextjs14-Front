@@ -1,7 +1,7 @@
 import GoBackBtn from "@/components/button/GoBackBtn";
 import GoForwardBtn from "@/components/button/GoForwardBtn";
 
-const ArticleDetailControl=({
+const BoardDetailControl=({
     id,totalIndex
 }:{
     id:number;
@@ -16,4 +16,4 @@ const ArticleDetailControl=({
 
     </>);
 }
-export default ArticleDetailControl;
+export default BoardDetailControl;

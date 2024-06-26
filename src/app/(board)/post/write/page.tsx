@@ -1,6 +1,6 @@
-import PostLink from "@/components/article/PostLink";
+import PostLink from "@/components/board/PostLink";
 import LinkIcon from "@/components/common/LinkIcon";
-import PostForm from "@/templates/article/PostForm";
+import PostForm from "@/templates/board/PostForm";
 
 export default async function PostWritePage() {
    

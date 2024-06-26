@@ -123,6 +123,9 @@ body {
     animation: squidge-5 var(--duration) ease-in-out infinite alternate;
   }
 
+  .animate-bounce{
+    animation: bounce 1s infinite;
+  }
 }
 
 

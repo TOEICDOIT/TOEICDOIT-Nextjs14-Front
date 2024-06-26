@@ -1,24 +1,24 @@
-import ArticleDetailContent from "@/components/article/ArticleDetailContent";
-import ArticleDetailControl from "@/components/article/ArticleDetailControl";
-import ArticleDetailProfile from "@/components/article/ArticleDetailProfile";
-import ArticleDetailTitle from "@/components/article/ArticleDetailTitle";
-import NoticeLink from "@/components/article/NoticeLink";
+import BoardDetailContent from "@/components/board/BoardDetailContent";
+import BoardDetailControl from "@/components/board/BoardDetailControl";
+import BoardDetailProfile from "@/components/board/BoardDetailProfile";
+import BoardDetailTitle from "@/components/board/BoardDetailTitle";
+import NoticeLink from "@/components/board/NoticeLink";
 import { CommonHeader } from "@/config/headers";
-import { I_ApiArticleDetailRequest, ArticleDetail, I_ApiArticleDetailResponse } from "@/types/ArticleData";
+import { I_ApiBoardDetailRequest, BoardDetail, I_ApiBoardDetailResponse } from "@/types/BoardData";
 
 export const metadata = {
-    title: "Toeicdoit - article Page",
+    title: "Toeicdoit - Board Page",
     description: "",
 };
 
-export default async function ArticleDetailPage({ params }: {
+export default async function BoardDetailPage({ params }: {
     params: {
         id: number;
     }
 }) {
 
-    const payload: I_ApiArticleDetailRequest = { id: params.id }
-    let article: ArticleDetail = {
+    const payload: I_ApiBoardDetailRequest = { id: params.id }
+    let Board: BoardDetail = {
         id: 0,
         title: "",
         writer: "",
@@ -41,10 +41,10 @@ export default async function ArticleDetailPage({ params }: {
             throw new Error('Failed to fetch notice detail');
         }
 
-        const data: I_ApiArticleDetailResponse = await response.json();
+        const data: I_ApiBoardDetailResponse = await response.json();
 
         if (data && data.success) {
-            article = data.article;
+            Board = data.Board;
             totalIndex = data.totalIndex;
         } else {
             console.error('Failed to get response data', data.message);
@@ -58,21 +58,21 @@ export default async function ArticleDetailPage({ params }: {
             <div className="w-full flex flex-col z-10 px-[7%]">
                 <NoticeLink />
                 <div className="mt-10" />
-                <ArticleDetailTitle
+                <BoardDetailTitle
                     type={"notice"}
-                    categoryId={article?.category?.id || 1}
-                    title={article?.title}
-                    category={article?.category?.category || ''} />
+                    categoryId={Board?.category?.id || 1}
+                    title={Board?.title}
+                    category={Board?.category?.category || ''} />
 
                 <div className="bg-zinc-300 w-full h-[0.5px] my-3" />
-                <ArticleDetailProfile
-                    writer={article.writer}
-                    create={article.create}
-                    update={article.update} />
+                <BoardDetailProfile
+                    writer={Board.writer}
+                    create={Board.create}
+                    update={Board.update} />
 
                 <div className="bg-zinc-300 w-full h-[0.5px] my-3" />
-                <ArticleDetailContent content={article.content} />
-                <ArticleDetailControl id={params.id} totalIndex={totalIndex}/>
+                <BoardDetailContent content={Board.content} />
+                <BoardDetailControl id={params.id} totalIndex={totalIndex}/>
             </div>
         </div>
     </>);

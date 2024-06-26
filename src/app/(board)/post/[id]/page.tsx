@@ -1,13 +1,13 @@
-import ArticleDetailContent from "@/components/article/ArticleDetailContent";
-import ArticleDetailControl from "@/components/article/ArticleDetailControl";
-import ArticleDetailProfile from "@/components/article/ArticleDetailProfile";
-import ArticleDetailReply from "@/components/article/ArticleDetailReply";
-import ArticleDetailTitle from "@/components/article/ArticleDetailTitle";
-import ArticleWriteReply from "@/components/article/ArticleWriteReply";
-import NoticeLink from "@/components/article/NoticeLink";
-import PostLink from "@/components/article/PostLink";
+import BoardDetailContent from "@/components/board/BoardDetailContent";
+import BoardDetailControl from "@/components/board/BoardDetailControl";
+import BoardDetailProfile from "@/components/board/BoardDetailProfile";
+import BoardDetailReply from "@/components/board/BoardDetailReply";
+import BoardDetailTitle from "@/components/board/BoardDetailTitle";
+import BoardWriteReply from "@/components/board/BoardWriteReply";
+import NoticeLink from "@/components/board/NoticeLink";
+import PostLink from "@/components/board/PostLink";
 import { CommonHeader } from "@/config/headers";
-import { I_ApiArticleDetailRequest, ArticleDetail, I_ApiArticleDetailResponse } from "@/types/ArticleData";
+import { I_ApiBoardDetailRequest, BoardDetail, I_ApiBoardDetailResponse } from "@/types/BoardData";
 import ChatIcon from '@mui/icons-material/Chat';
 
 
@@ -21,8 +21,8 @@ export default async function PostDetailPage({ params }: {
     }
 }) {
 
-    const payload: I_ApiArticleDetailRequest = { id: params.id }
-    let article: ArticleDetail = {
+    const payload: I_ApiBoardDetailRequest = { id: params.id }
+    let Board: BoardDetail = {
         id: 0,
         title: "",
         writer: "",
@@ -45,10 +45,10 @@ export default async function PostDetailPage({ params }: {
             throw new Error('Failed to fetch notice detail');
         }
 
-        const data: I_ApiArticleDetailResponse = await response.json();
+        const data: I_ApiBoardDetailResponse = await response.json();
 
         if (data && data.success) {
-            article = data.article;
+            Board = data.Board;
             totalIndex = data.totalIndex;
         } else {
             console.error('Failed to get response data', data.message);
@@ -62,21 +62,21 @@ export default async function PostDetailPage({ params }: {
             <div className="w-full flex flex-col z-10 px-[7%]">
                 <PostLink label={""} />
                 <div className="mt-10" />
-                <ArticleDetailTitle
+                <BoardDetailTitle
                     type={"post"}
-                    categoryId={article?.category?.id || 1}
-                    title={article?.title}
-                    category={article?.category?.category || ''} />
+                    categoryId={Board?.category?.id || 1}
+                    title={Board?.title}
+                    category={Board?.category?.category || ''} />
 
                 <div className="bg-zinc-300 w-full h-[0.5px] my-3" />
-                <ArticleDetailProfile
-                    writer={article.writer}
-                    create={article.create}
-                    update={article.update} />
+                <BoardDetailProfile
+                    writer={Board.writer}
+                    create={Board.create}
+                    update={Board.update} />
 
                 <div className="bg-zinc-300 w-full h-[0.5px] my-3" />
-                <ArticleDetailContent content={article.content} />
-                <ArticleDetailControl id={params.id} totalIndex={totalIndex} />
+                <BoardDetailContent content={Board.content} />
+                <BoardDetailControl id={params.id} totalIndex={totalIndex} />
 
                 <div className="mt-16" />
                 <div className='flex flex-row items-center gap-x-3'>
@@ -84,15 +84,15 @@ export default async function PostDetailPage({ params }: {
                     <p className="text-black text-2xl font-medium">댓글</p>
                 </div>
                 <div className="bg-zinc-300 w-full h-[0.5px] my-3" />
-                <ArticleWriteReply/>
+                <BoardWriteReply/>
                 <div className="bg-zinc-300 w-full h-[0.5px] my-3" />
 
-                {article.reply?.map((reply)=>(
+                {Board.reply?.map((reply)=>(
                     <>
-                    <ArticleDetailReply writer={reply.writer || ''} content={article.content} create={article.create} id={reply.id} />
+                    <BoardDetailReply writer={reply.writer || ''} content={Board.content} create={Board.create} id={reply.id} />
                     </>            
                 ))}
-                <ArticleDetailReply writer={"작성자"} content={article.content} create={article.create} id={1} />
+                <BoardDetailReply writer={"작성자"} content={Board.content} create={Board.create} id={1} />
             </div>
         </div>
     </>);

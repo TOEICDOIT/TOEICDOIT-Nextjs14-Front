@@ -40,6 +40,6 @@ const config: Config = {
       slidein900: "slidein 1s ease 900ms forwards",
     }
   },
-  plugins: [],
+  plugins: [require('tailwind-scrollbar-hide')],
 };
 export default config;

@@ -1,8 +1,8 @@
 import Search from "@/components/common/Search";
-import ArticleLoading from "@/components/article/ArticleLoading";
-import ArticleTable from "@/components/article/ArticleTable";
+import BoardLoading from "@/components/board/BoardLoading";
+import BoardTable from "@/components/board/BoardTable";
 import CustomPagination from "@/components/common/CustomPagination";
-import { I_ApiArticleRequest, I_ApiArticleResponse, ArticleDataPublic } from "@/types/ArticleData";
+import { I_ApiBoardRequest, I_ApiBoardResponse, BoardDataPublic } from "@/types/BoardData";
 import { ITEMS_PER_PAGE } from "@/types/ToeicData";
 import { Suspense } from "react";
 import WriteBtn from "@/components/button/WriteBtn";
@@ -21,10 +21,10 @@ export default async function PostPage({searchParams}:{
     const query=searchParams?.query||'';
     const currentPage=Number(searchParams?.page)||0;
     let totalPages:number=0;
-    let posts:ArticleDataPublic[]=[];
+    let posts:BoardDataPublic[]=[];
     const offset=(currentPage-1)*ITEMS_PER_PAGE;
 
-    const payload:I_ApiArticleRequest={
+    const payload:I_ApiBoardRequest={
         query:query,
         currentPage:currentPage,
         offset:offset
@@ -42,10 +42,10 @@ export default async function PostPage({searchParams}:{
             throw new Error('Failed to fetch post');
         }
 
-        const data:I_ApiArticleResponse=await response.json();
+        const data:I_ApiBoardResponse=await response.json();
 
         if(data && data.success){
-            posts=data.articles;
+            posts=data.Boards;
             totalPages=data.totalPages;
         }else{
             console.error('Failed to get response data',data.message);
@@ -63,8 +63,8 @@ export default async function PostPage({searchParams}:{
                 <Search placeholder={"검색어를 입력해주세요."} />
                 <WriteBtn/>
             </div>
-            <Suspense key={query + currentPage} fallback={<><ArticleLoading/></>}>
-                <ArticleTable notices={posts} type={2} />
+            <Suspense key={query + currentPage} fallback={<><BoardLoading/></>}>
+                <BoardTable notices={posts} type={2} />
             </Suspense>
             <div className="mt-5 flex w-full justify-center">
                <CustomPagination totalPages={totalPages}/> 

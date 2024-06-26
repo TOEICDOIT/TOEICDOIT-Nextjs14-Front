@@ -9,7 +9,7 @@ import { usePathname } from "next/navigation";
 const initialState = {
     message: "",
 };
-const ArticleWriteReply = () => {
+const BoardWriteReply = () => {
     const pathname = usePathname();
     const [state, formAction] = useFormState((prevState:{message:string}, formData:FormData) => createReply(prevState, formData, pathname), initialState);
     const [charCount, setCharCount] = useState(0);
@@ -49,4 +49,4 @@ const ArticleWriteReply = () => {
         </form>
     </>);
 }
-export default ArticleWriteReply;
+export default BoardWriteReply;

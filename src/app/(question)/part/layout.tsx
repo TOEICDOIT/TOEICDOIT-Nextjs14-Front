@@ -1,21 +1,17 @@
-import LayoutWrapper from "@/app/(question)/part/LayoutWrapper";
-
 export const metadata = {
-    title: "Toeicdoit - Level Practice Page",
+    title: "Toeicdoit - Part Page",
     description: "",
 };
 
-export default function LevelLayout({
+export default function PartLayout({
     children,
 }: Readonly<{
     children: React.ReactNode;
 }>) {
     return (
         <>
-            <div className="w-full total_padding">
-            <LayoutWrapper>
-            {children}
-            </LayoutWrapper>
+            <div className="w-full min-h-screen">
+                {children}
             </div>
         </>
 

@@ -1,9 +1,10 @@
 'use server';
-import { ArticleDataPublic } from "@/types/ArticleData";
-import ArticleBody from "./ArticleBody";
-import { getCategoryColor } from "@/lib/utils/style";
 
-const ArticleTable = async ({ notices,type }: { notices: ArticleDataPublic[],type:number }) => {
+import { getCategoryColor } from "@/lib/utils/style";
+import { BoardDataPublic } from "@/types/BoardData";
+import BoardBody from "./BoardBody";
+
+const BoardTable = async ({ notices,type }: { notices: BoardDataPublic[],type:number }) => {
 
     return (<>
         <div className="mt-10 flow-root">
@@ -45,7 +46,7 @@ const ArticleTable = async ({ notices,type }: { notices: ArticleDataPublic[],typ
                             </tr>
                         </thead>
                         <tbody className="bg-white rounded-2xl w-full flex justify-between">
-                        <ArticleBody
+                        <BoardBody
                                     key={1}
                                     id={1}
                                     type={type}
@@ -66,9 +67,9 @@ const ArticleTable = async ({ notices,type }: { notices: ArticleDataPublic[],typ
                                         {/* {notice.update} */}
                                     </td>
 
-                                </ArticleBody>
+                                </BoardBody>
                             {notices?.map((notice) => (
-                                <ArticleBody
+                                <BoardBody
                                     key={notice.id}
                                     id={notice.id}
                                     type={type}
@@ -89,7 +90,7 @@ const ArticleTable = async ({ notices,type }: { notices: ArticleDataPublic[],typ
                                         {/* {notice.update} */}
                                     </td>
 
-                                </ArticleBody>))}
+                                </BoardBody>))}
                         </tbody>
                     </table>
                 </div>
@@ -98,4 +99,4 @@ const ArticleTable = async ({ notices,type }: { notices: ArticleDataPublic[],typ
 
     </>);
 }
-export default ArticleTable;
+export default BoardTable;

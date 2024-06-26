@@ -48,7 +48,7 @@ export async function fetchQuestions({
             currentPage: pageParam,
             nextPage: nextPage,
         };
-        
+
     } catch (err) {
         console.log('Failed to get level: ', err);
         return {
@@ -56,5 +56,13 @@ export async function fetchQuestions({
             currentPage: pageParam,
             nextPage: null,
         };
+    }
+}
+
+export async function submitLevelTest(prevState: { message: string },
+    formData: FormData
+){
+    const data={
+        
     }
 }

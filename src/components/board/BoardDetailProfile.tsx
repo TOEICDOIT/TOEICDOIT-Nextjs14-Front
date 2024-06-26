@@ -1,6 +1,6 @@
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
-const ArticleDetailProfile = ({
+const BoardDetailProfile = ({
 writer,create,update
 }:{
     writer:string;
@@ -37,4 +37,4 @@ writer,create,update
 
     </>);
 }
-export default ArticleDetailProfile;
+export default BoardDetailProfile;

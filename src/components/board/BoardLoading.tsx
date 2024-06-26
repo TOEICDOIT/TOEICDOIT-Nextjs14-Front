@@ -1,4 +1,4 @@
-const ArticleLoading=()=>{
+const BoardLoading=()=>{
     return(<>
     <div className="md:hidden">
             <div className="flex flex-col gap-y-12">
@@ -19,4 +19,4 @@ const ArticleLoading=()=>{
             </div>
     </>);
 }
-export default ArticleLoading;
+export default BoardLoading;

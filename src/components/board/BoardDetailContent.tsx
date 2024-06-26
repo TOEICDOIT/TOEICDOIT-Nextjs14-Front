@@ -1,6 +1,6 @@
 import { ScrollArea, ScrollBar } from "@/components/utils/ScrollArea";
 
-const ArticleDetailContent = ({content}:{
+const BoardDetailContent = ({content}:{
     content:string
 }) => {
     return (<>
@@ -14,4 +14,4 @@ const ArticleDetailContent = ({content}:{
         </ScrollArea>
     </>);
 }
-export default ArticleDetailContent;
+export default BoardDetailContent;

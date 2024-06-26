@@ -1,11 +1,11 @@
 import Search from "@/components/common/Search";
-import ArticleLoading from "@/components/article/ArticleLoading";
-import ArticleTable from "@/components/article/ArticleTable";
 import CustomPagination from "@/components/common/CustomPagination";
-import {I_ApiArticleRequest, I_ApiArticleResponse, ArticleDataPublic } from "@/types/ArticleData";
 import { ITEMS_PER_PAGE } from "@/types/ToeicData";
 import { Suspense } from "react";
 import { CommonHeader } from "@/config/headers";
+import BoardLoading from "@/components/board/BoardLoading";
+import BoardTable from "@/components/board/BoardTable";
+import { BoardDataPublic, I_ApiBoardRequest, I_ApiBoardResponse } from "@/types/BoardData";
 
 export const metadata = {
     title: "Toeicdoit - Notice Page",
@@ -21,17 +21,17 @@ export default async function NoticePage({searchParams}:{
     const query = searchParams?.query || '';
     const currentPage=Number(searchParams?.page)||1;
     let totalPages:number=0;
-    let notices:ArticleDataPublic[]=[];
-    const offset=(currentPage-1)* ITEMS_PER_PAGE;   //index in article db
+    let notices:BoardDataPublic[]=[];
+    const offset=(currentPage-1)* ITEMS_PER_PAGE;   //index in Board db
     
-    const payload: I_ApiArticleRequest = {
+    const payload: I_ApiBoardRequest = {
         query:query,
         currentPage:currentPage,
         offset:offset
     };
 
     try{
-        const response=await fetch(`${process.env.NEXT_PUBLIC_API_URL}/article/getAll`,{
+        const response=await fetch(`${process.env.NEXT_PUBLIC_API_URL}/Board/getAll`,{
             method:'POST',
             headers:CommonHeader,
             body:JSON.stringify(payload),
@@ -42,10 +42,10 @@ export default async function NoticePage({searchParams}:{
             throw new Error('Failed to fetch notice');
         }
 
-        const data:I_ApiArticleResponse=await response.json();
+        const data:I_ApiBoardResponse=await response.json();
 
         if(data && data.success){
-            notices=data.articles;
+            notices=data.Boards;
             totalPages=data.totalPages;
         }else{
             console.error('Failed to get response data',data.message);
@@ -61,8 +61,8 @@ export default async function NoticePage({searchParams}:{
             <div className="mt-4 flex items-center md:mt-8">
                 <Search placeholder={"검색어를 입력해주세요."} />
             </div>
-            <Suspense key={query + currentPage} fallback={<><ArticleLoading/></>}>
-                <ArticleTable notices={notices} type={1} />
+            <Suspense key={query + currentPage} fallback={<><BoardLoading/></>}>
+                <BoardTable notices={notices} type={1} />
             </Suspense>
             <div className="mt-5 flex w-full justify-center">
                <CustomPagination totalPages={totalPages}/> 

@@ -1,6 +1,6 @@
 import { getCategoryColor } from "@/lib/utils/style";
 
-const ArticleDetailTitle=({
+const BoardDetailTitle=({
     type,categoryId,title,category
 }:{
     type:string;
@@ -19,4 +19,4 @@ const ArticleDetailTitle=({
 
     </>
 );
-export default ArticleDetailTitle;
+export default BoardDetailTitle;

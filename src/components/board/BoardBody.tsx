@@ -1,7 +1,7 @@
 'use client';
 import { useRouter } from "next/navigation";
 
-const ArticleBody = ({ children, id,type }: {
+const BoardBody = ({ children, id,type }: {
     children: React.ReactNode,
     id: number,
     type:number,
@@ -19,4 +19,4 @@ const ArticleBody = ({ children, id,type }: {
         </tr>
     </>);
 }
-export default ArticleBody;
+export default BoardBody;
