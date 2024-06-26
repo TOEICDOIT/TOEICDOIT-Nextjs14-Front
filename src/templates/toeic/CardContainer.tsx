@@ -1,4 +1,4 @@
-import LevelCard from "@/components/level/LevelCard";
+import LevelCard from "@/components/toeic/LevelCard";
 import { LevelCardContent } from "@/constants/level/card";
 
 const CardContainer = () => {

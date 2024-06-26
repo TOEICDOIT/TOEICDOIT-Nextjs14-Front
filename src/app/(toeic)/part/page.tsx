@@ -1,6 +1,6 @@
 import Footer from "@/app/Footer";
 import Navbar from "@/app/Navbar";
-import PartCard from "@/components/part/PartCard";
+import PartCard from "@/components/toeic/PartCard";
 
 export default function PartPage() {
 

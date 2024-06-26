@@ -1,17 +1,24 @@
-import { OptionData } from "@/types/ToeicData";
+import { OptionData, OptionDataPublic, ToeicDataPublic } from "@/types/ToeicData";
 import Image from "next/image";
 import { FC } from "react";
+import ToeicModalBtn from "./ToeicModalBtn";
 
 interface QuestionCardProps {
-    question: string;
-    id: number;
-    picture: string;
-    option: OptionData;
+    id:number;
+    take:boolean;
+    question:string;
+    image:string;
+    option:OptionDataPublic;
+    answer:string;
+    //toeic: ToeicDataPublic;
     onSelect: (id: number, answer: string) => void;
 }
 const QuestionCard: FC<QuestionCardProps> = ({
-    question, id, picture, option, onSelect
+    //toeic
+    id,take,question,image,option,answer
+    , onSelect
 }) => {
+
     return (<>
         <div
             key={id}
@@ -30,10 +37,10 @@ const QuestionCard: FC<QuestionCardProps> = ({
             <div
                 key="level practice image"
                 className="mt-3">
-                {picture !== '' &&
+                {image !== '' &&
                     <div className="2xl:mx-0 mb-10 object-cover w-[550px] lg:w-[600px]">
                         <Image
-                            src={`${picture}`}
+                            src={`${image}`}
                             alt={"level practice image"}
                             width={600}
                             height={300}
@@ -57,7 +64,7 @@ const QuestionCard: FC<QuestionCardProps> = ({
 
                     <label
                         htmlFor={`a-${id}`}
-                        className="ms-2 text-xl font-medium text-gray-900 flex flex-row justify-start limited-width-text ">
+                        className={`ms-2 text-xl font-medium flex flex-row justify-start limited-width-text ${take && answer==='a' ?'text-red-500':'text-gray-900 '}`}>
                         <p className="text-nowrap mr-2">(a)</p>
                         {option.choice1}
                     </label>
@@ -74,45 +81,54 @@ const QuestionCard: FC<QuestionCardProps> = ({
                     >
                     <label
                         htmlFor={`b-${id}`}
-                        className="ms-2 text-xl font-medium text-gray-900 flex flex-row justify-start limited-width-text">
+                        className={`ms-2 text-xl font-medium flex flex-row justify-start limited-width-text ${take && answer==='b' ?'text-red-500':'text-gray-900 '}`}>
+                        
                         <p className="text-nowrap mr-2">(b)</p>
                         {option.choice2}
                     </label>
                 </div>
 
                 <div className="flex items-start mb-4">
-                    <input 
-                    id={`c-${id}`} 
-                    type="radio" 
-                    value="c" 
-                    name={id.toString()}
-                        className="w-6 h-6 mt-1 text-blue-600 bg-gray-100 border-gray-300 " 
-                        onChange={()=>onSelect(id,'c')}
-                        />
-                    <label 
-                    htmlFor={`c-${id}`}
-                    className="ms-2 text-xl font-medium text-gray-900 flex flex-row justify-start limited-width-text">
+                    <input
+                        id={`c-${id}`}
+                        type="radio"
+                        value="c"
+                        name={id.toString()}
+                        className="w-6 h-6 mt-1 text-blue-600 bg-gray-100 border-gray-300 "
+                        onChange={() => onSelect(id, 'c')}
+                    />
+                    <label
+                        htmlFor={`c-${id}`}
+                        className={`ms-2 text-xl font-medium flex flex-row justify-start limited-width-text ${take && answer==='c' ?'text-red-500':'text-gray-900 '}`}>
+                        
                         <p className="text-nowrap mr-2">(c)</p>
                         {option.choice3}
                     </label>
                 </div>
                 <div className="flex items-start mb-4">
-                    <input 
-                    id={`d-${id}`}
-                    type="radio" 
-                    value="d" 
-                    name={id.toString()}
-                        className="w-6 h-6 mt-1 text-blue-600 bg-gray-100 border-gray-300 " 
-                        onChange={()=>onSelect(id,'c')}/>
-                    <label 
-                    htmlFor={`d-${id}`} 
-                    className="ms-2 text-xl font-medium text-gray-900 flex flex-row justify-start limited-width-text">
+                    <input
+                        id={`d-${id}`}
+                        type="radio"
+                        value="d"
+                        name={id.toString()}
+                        className="w-6 h-6 mt-1 text-blue-600 bg-gray-100 border-gray-300 "
+                        onChange={() => onSelect(id, 'd')} />
+                    <label
+                        htmlFor={`d-${id}`}
+                        className={`ms-2 text-xl font-medium flex flex-row justify-start limited-width-text ${take && answer==='d' ?'text-red-500':'text-gray-900 '}`}>
+                        
                         <p className="text-nowrap mr-2">(d)</p>
                         {option.choice4}
                     </label>
                 </div>
             </div>
 
+            {take && <>
+                <div className="flex flex-row gap-x-5 mt-5">
+                    <ToeicModalBtn id={1} label={"해설 보기"} description={"toeic.description"} />
+                    <ToeicModalBtn id={2} label={"ai 해설 강의 듣기"} />
+                </div>
+            </>}
         </div>
     </>);
 }

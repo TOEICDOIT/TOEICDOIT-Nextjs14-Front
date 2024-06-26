@@ -1,4 +1,4 @@
-import QuestionContainer from "@/templates/level/QuestionContainer";
+import QuestionContainer from "@/templates/toeic/QuestionContainer";
 
 export default async function LevelPracticePage({ params }: {
     params: {

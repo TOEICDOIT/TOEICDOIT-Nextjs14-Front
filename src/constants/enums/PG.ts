@@ -3,5 +3,6 @@ export const enum PG{
     REGISTER='/register',   
     NOTICE='/notice',
     POST='/post',
-    
+    SCORE='/score',
+    LEVEL='/level',
 }

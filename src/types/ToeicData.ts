@@ -1,8 +1,8 @@
 export type ToeicData={
     id:number;
-    quesiton:string;
-    level:number;
     part:number;
+    level:number;
+    quesiton:string;
     answer:string;
     description:string;
     image:string;
@@ -25,24 +25,33 @@ export type OptionData={
 export type ResultData={
     id:number;
     result:boolean;
-    userAnswer:string;
+    userAnswer:AnswerData[];
     isCorrect:boolean;
     createdAt:Date;
     updatedAt:Date;
 }
 export type AnswerData={
     id:number;
-    question:number;
-    answer:number;
+    answer:string;
 }
 export type ToeicDataPublic={
     id:ToeicData['id'],
-    quesiton:ToeicData['quesiton'];
+    question:ToeicData['quesiton'];
     part:ToeicData['part'];
     image:ToeicData['image'];
     sound:ToeicData['sound'];
     option:ToeicData['option'];
-
+    take:ToeicData['take'];
+    answer:ToeicData['answer'];
+    description:ToeicData['description'];
+    script:ToeicData['script'];
+}
+export type OptionDataPublic={
+    id:OptionData['id'];
+    choice1:OptionData['choice1'];
+    choice2:OptionData['choice2'];
+    choice3:OptionData['choice3'];
+    choice4:OptionData['choice4'];
 }
 export const ITEMS_PER_PAGE = 10;
 export const CURRENT_TOTAL_PAGE=10;

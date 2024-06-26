@@ -1,7 +1,7 @@
 import Footer from "@/app/Footer";
 import Navbar from "@/app/Navbar";
 import LoadingPage from "@/app/loading";
-import CardContainer from "@/templates/level/CardContainer";
+import CardContainer from "@/templates/toeic/CardContainer";
 
 
 

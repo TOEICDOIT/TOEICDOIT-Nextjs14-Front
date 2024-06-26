@@ -1,4 +1,4 @@
-import { CheckBoxType, CheckCautionType, CheckServiceProviderType, CheckTermsContentType, CheckTermsTitleType } from "@/types/CheckBox";
+import { CheckBoxType, CheckTermsTitleType, CheckTermsContentType, CheckServiceProviderType, CheckCautionType } from "@/types/CheckBoxData";
 
 export const check: CheckBoxType[] = [
     {
